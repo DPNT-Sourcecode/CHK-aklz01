@@ -8,4 +8,7 @@ describe('SUM challenge: adding two numbers', function() {
 	it('should return 3, which is the sum of 1 and 2', function() {
 	    assert.equal(new SumSolution().compute(1, 2), 3);
 	});
+	it('raise integer out of range error for negative numbers', function() {
+		assert.throws(() => {new SumSolution().compute(-1, 2)}, /Integer out of range/);
+	})
 });
