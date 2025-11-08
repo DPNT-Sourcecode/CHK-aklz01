@@ -15,6 +15,7 @@ describe('HLO Challenge: Saying hello', function() {
     });
 
     it('should throw an error for non primative input', function() {
+        assert.throws(() => new HelloSolution().hello(123), Error)
         assert.throws(() => new HelloSolution().hello([]), Error)
         assert.throws(() => new HelloSolution().hello({}), Error)
     })
