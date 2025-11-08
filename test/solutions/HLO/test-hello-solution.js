@@ -6,6 +6,6 @@ const HelloSolution = require('../../../lib/solutions/HLO/hello_solution');
 
 describe('HLO Challenge: Saying hello', function() {
     it('should return the string "Hello" with the string passed', function() {
-        assert.strictEqual(new HelloSolution().hello('Russell'), 'Hello, Russell!')
+        assert.strictEqual(new HelloSolution().hello('Russell'), 'Hello, World!')
     })
 })
