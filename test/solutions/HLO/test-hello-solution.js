@@ -9,8 +9,13 @@ describe('HLO Challenge: Saying hello', function() {
         assert.strictEqual(new HelloSolution().hello('Russell'), 'Hello, Russell!')
     })
 
-     it('should reject null or undefined input', function() {
-            assert.throws(() =>new HelloSolution().hello(null), Error);
-            assert.throws(() => new HelloSolution().hello(undefined), Error);
-        });
+    it('should thorw and error for null or undefined input', function() {
+        assert.throws(() => new HelloSolution().hello(null), Error);
+        assert.throws(() => new HelloSolution().hello(undefined), Error);
+    });
+
+    it('should throw an error for non primative input', function() {
+        assert.throws(() => new HelloSolution().hello([]), Error)
+        assert.throws(() => new HelloSolution().hello({}), Error)
+    })
 })
