@@ -11,4 +11,7 @@ describe('SUM challenge: adding two numbers', function() {
 	it('raise integer out of range error for negative numbers', function() {
 		assert.throws(() => {new SumSolution().compute(-1, 2)}, /Integer out of range/);
 	})
+	it('rasies integer out of range error for numbers greater than 100', function() {
+		assert.throws(() => {new SumSolution().compute(101, 2)}, /Integer out of range/);
+	})
 });
