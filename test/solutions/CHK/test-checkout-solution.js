@@ -3,9 +3,9 @@ var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
-const {PRICES, MULTI_BUY_OFFERS} = require('../../../lib/solutions/CHK/inventory/prices')
+const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/inventory/prices')
 
-describe('CHK Challenge: Checkout', function() {
+describe('CHK Challenge: Checkout', function () {
     it('should return zero for empty input', () => {
         assert.strictEqual(new CheckoutSolution().checkout(''), 0)
     })
@@ -14,7 +14,7 @@ describe('CHK Challenge: Checkout', function() {
         assert.strictEqual(new CheckoutSolution().checkout('A'), PRICES['A'])
     })
 
-    it('should return the correct price  for a single B', () => {
+    it('should return the correct price for a single B', () => {
         assert.strictEqual(new CheckoutSolution().checkout('B'), PRICES['B'])
     })
 
@@ -51,5 +51,11 @@ describe('CHK Challenge: Checkout', function() {
         assert.strictEqual(new CheckoutSolution().checkout('AAABBA'), EXPECTED_TOTAL)
     })
 
-    // it('', () => {})
+    it('should return -1 for an input that contains invalid skus', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('ABG'), -1)
+    })
+
+    it('should return -1 for an input that contains invalid string', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('AB C'), -1)
+    })
 })
