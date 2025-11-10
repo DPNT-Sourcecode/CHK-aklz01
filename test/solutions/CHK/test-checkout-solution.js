@@ -9,20 +9,20 @@ describe('CHK Challenge: Checkout', function() {
         assert.strictEqual(new CheckoutSolution().checkout(''), 0)
     })
 
-    it.skip('single A returns 50', () => {
-        assert.strictEqual(true, true)
+    it('single A returns 50', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('A'), 50)
     })
 
-    it.skip('single B returns 30', () => {
-        assert.strictEqual(true, true)
+    it('single B returns 30', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('B'), 30)
     })
 
-    it.skip('single C returns 20', () => {
-        assert.strictEqual(true, true)
+    it('single C returns 20', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('C'), 20)
     })
 
-    it.skip('single D returns 15', () => {
-        assert.strictEqual(true, true)
+    it('single D returns 15', () => {
+        assert.strictEqual(new CheckoutSolution().checkout('D'), 15)
     })
 
     it.skip('empty input returns zero', () => {
