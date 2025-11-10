@@ -90,7 +90,9 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         })
         
         it('should return the correct offer price for five A, selecting the right offer', () => {
-            assert.strictEqual(new CheckoutSolution().checkout('EEEEB'), PRICES['E'] * 4)
+            OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
+
+            assert.strictEqual(new CheckoutSolution().checkout('AAAAA'), OFFER_PRICE_FOR_FIVE_A)
         })
     })
 })
