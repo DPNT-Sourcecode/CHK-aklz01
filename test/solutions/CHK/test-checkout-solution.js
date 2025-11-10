@@ -25,7 +25,7 @@ describe('CHK Challenge: Checkout', function() {
         assert.strictEqual(new CheckoutSolution().checkout('D'), 15)
     })
 
-    it.skip('empty input returns zero', () => {
-        assert.strictEqual(true, true)
+    it('no string input returns -1', () => {
+        assert.strictEqual(new CheckoutSolution().checkout(2), -1)
     })
 })
