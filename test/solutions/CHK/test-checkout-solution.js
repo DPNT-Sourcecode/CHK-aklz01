@@ -89,5 +89,8 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             assert.strictEqual(new CheckoutSolution().checkout('EEEEB'), PRICES['E'] * 4)
         })
         
+        it('should return the correct offer price for five A, selecting the right offer', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('EEEEB'), PRICES['E'] * 4)
+        })
     })
 })
