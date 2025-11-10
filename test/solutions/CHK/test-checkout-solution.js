@@ -5,34 +5,37 @@ var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
 const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/inventory/prices')
 
-describe('CHK Challenge: Checkout', function () {
-    it('should return zero for empty input', () => {
-        assert.strictEqual(new CheckoutSolution().checkout(''), 0)
-    })
+describe('CHK Challenge: checkout(string) -> integer', function () {
 
-    it('should return the correct price for a single A', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('A'), PRICES['A'])
-    })
+    describe('Basic Functionality', () => {
+        it('should return zero for empty input', () => {
+            assert.strictEqual(new CheckoutSolution().checkout(''), 0)
+        })
 
-    it('should return the correct price for a single B', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('B'), PRICES['B'])
-    })
+        it('should return the correct price for a single A', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('A'), PRICES['A'])
+        })
 
-    it('should return the correct price  for a single C', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('C'), PRICES['C'])
-    })
+        it('should return the correct price for a single B', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('B'), PRICES['B'])
+        })
 
-    it('should return the correct price  for a single D', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('D'), PRICES['D'])
-    })
+        it('should return the correct price  for a single C', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('C'), PRICES['C'])
+        })
 
-    it('should return -1 for an input that is not a valid string', () => {
-        assert.strictEqual(new CheckoutSolution().checkout(2), -1)
-    })
+        it('should return the correct price  for a single D', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('D'), PRICES['D'])
+        })
 
-    it('should return the total for multiple items: ABCD', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('ABCD'), PRICES['A'] + PRICES['B'] + PRICES['C'] + PRICES['D'])
-    })
+        it('should return -1 for an input that is not a valid string', () => {
+            assert.strictEqual(new CheckoutSolution().checkout(2), -1)
+        })
+
+        it('should return the total for multiple items: ABCD', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('ABCD'), PRICES['A'] + PRICES['B'] + PRICES['C'] + PRICES['D'])
+        })
+    }
 
     it('should return the offer price for three A skus', () => {
         OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
@@ -58,4 +61,6 @@ describe('CHK Challenge: Checkout', function () {
     it('should return -1 for an input that contains invalid string', () => {
         assert.strictEqual(new CheckoutSolution().checkout('AB C'), -1)
     })
+
+
 })
