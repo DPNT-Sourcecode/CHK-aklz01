@@ -101,5 +101,12 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
 
             assert.strictEqual(new CheckoutSolution().checkout('AAAAAAAA'), OFFER_PRICE_FOR_THREE_A + OFFER_PRICE_FOR_FIVE_A)
         })
+
+        it('should return the correct offer price for multiple offers', () => {
+            OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
+            OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
+
+            assert.strictEqual(new CheckoutSolution().checkout('AAABEE'), OFFER_PRICE_FOR_THREE_A + PRICES['E'] * 2)
+        })
     })
 })
