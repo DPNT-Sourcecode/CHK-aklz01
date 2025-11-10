@@ -28,39 +28,49 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             assert.strictEqual(new CheckoutSolution().checkout('D'), PRICES['D'])
         })
 
-        it('should return -1 for an input that is not a valid string', () => {
-            assert.strictEqual(new CheckoutSolution().checkout(2), -1)
-        })
-
         it('should return the total for multiple items: ABCD', () => {
             assert.strictEqual(new CheckoutSolution().checkout('ABCD'), PRICES['A'] + PRICES['B'] + PRICES['C'] + PRICES['D'])
         })
-    }
-
-    it('should return the offer price for three A skus', () => {
-        OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
-        assert.strictEqual(new CheckoutSolution().checkout('AAA'), OFFER_PRICE_FOR_A)
     })
 
-    it('should return the offer price for two B skus', () => {
-        OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
-        assert.strictEqual(new CheckoutSolution().checkout('BB'), OFFER_PRICE_FOR_B)
+    describe('Offers Functionality', () => {
+
+        it('should return the offer price for three A skus', () => {
+            OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
+            assert.strictEqual(new CheckoutSolution().checkout('AAA'), OFFER_PRICE_FOR_A)
+        })
+
+        it('should return the offer price for two B skus', () => {
+            OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
+            assert.strictEqual(new CheckoutSolution().checkout('BB'), OFFER_PRICE_FOR_B)
+        })
+
+        it('should return the correct price for complex basket: AAABBA', () => {
+            OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
+            OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
+            EXPECTED_TOTAL = OFFER_PRICE_FOR_A + OFFER_PRICE_FOR_B + PRICES['A']
+            assert.strictEqual(new CheckoutSolution().checkout('AAABBA'), EXPECTED_TOTAL)
+        })
     })
 
-    it('should return the correct price for complex basket: AAABBA', () => {
-        OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
-        OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
-        EXPECTED_TOTAL = OFFER_PRICE_FOR_A + OFFER_PRICE_FOR_B + PRICES['A']
-        assert.strictEqual(new CheckoutSolution().checkout('AAABBA'), EXPECTED_TOTAL)
+    describe('Edge and Error cases', () => {
+
+        it('should return -1 for an input that is not a valid string', () => {
+                assert.strictEqual(new CheckoutSolution().checkout(2), -1)
+            })
+
+        it('should return -1 for an input that contains invalid skus', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('ABG'), -1)
+        })
+
+        it('should return -1 for an input that contains invalid string', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('AB C'), -1)
+        })
     })
 
-    it('should return -1 for an input that contains invalid skus', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('ABG'), -1)
+    describe('round 2 - New Item and Offers', () => {
+        it('should return the correct price for a single E', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('E'), PRICES['E'])
+        })
     })
-
-    it('should return -1 for an input that contains invalid string', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('AB C'), -1)
-    })
-
-
 })
