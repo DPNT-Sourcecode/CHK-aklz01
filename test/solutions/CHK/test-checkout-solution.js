@@ -3,7 +3,7 @@ var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
-const {PRICES} = require('../../../lib/solutions/CHK/inventory/prices')
+const {PRICES, MULTI_BUY_OFFERS} = require('../../../lib/solutions/CHK/inventory/prices')
 
 describe('CHK Challenge: Checkout', function() {
     it('should return zero for empty input', () => {
@@ -31,11 +31,12 @@ describe('CHK Challenge: Checkout', function() {
     })
 
     it('should return the total for multiple items: ABCD', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('ABCD'), 115)
+        assert.strictEqual(new CheckoutSolution().checkout('ABCD'), PRICES['A'] + PRICES['B'] + PRICES['C'] + PRICES['D'])
     })
 
     it('should return the offer price for three A skus', () => {
-        assert.strictEqual(new CheckoutSolution().checkout('AAA'), 130)
+        OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
+        assert.strictEqual(new CheckoutSolution().checkout('AAA'), OFFER_PRICE_FOR_A)
     })
 
     // it('', () => {})
