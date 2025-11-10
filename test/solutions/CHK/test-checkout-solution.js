@@ -44,5 +44,12 @@ describe('CHK Challenge: Checkout', function() {
         assert.strictEqual(new CheckoutSolution().checkout('BB'), OFFER_PRICE_FOR_B)
     })
 
+    it('should return the correct price for complex basket: AAABBA', () => {
+        OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
+        OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
+        EXPECTED_TOTAL = OFFER_PRICE_FOR_A + OFFER_PRICE_FOR_B + PRICES['A']
+        assert.strictEqual(new CheckoutSolution().checkout('AAABBA'), EXPECTED_TOTAL)
+    })
+
     // it('', () => {})
 })
