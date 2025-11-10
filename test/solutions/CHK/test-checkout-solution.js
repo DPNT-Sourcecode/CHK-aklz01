@@ -36,8 +36,8 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
     describe('Offers Functionality', () => {
 
         it('should return the offer price for three A skus', () => {
-            OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
-            assert.strictEqual(new CheckoutSolution().checkout('AAA'), OFFER_PRICE_FOR_A)
+            OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
+            assert.strictEqual(new CheckoutSolution().checkout('AAA'), OFFER_PRICE_FOR_THREE_A)
         })
 
         it('should return the offer price for two B skus', () => {
@@ -46,9 +46,9 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         })
 
         it('should return the correct price for complex basket: AAABBA', () => {
-            OFFER_PRICE_FOR_A = MULTI_BUY_OFFERS['A'][0].price
+            OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
             OFFER_PRICE_FOR_B = MULTI_BUY_OFFERS['B'][0].price
-            EXPECTED_TOTAL = OFFER_PRICE_FOR_A + OFFER_PRICE_FOR_B + PRICES['A']
+            EXPECTED_TOTAL = OFFER_PRICE_FOR_THREE_A + OFFER_PRICE_FOR_B + PRICES['A']
             assert.strictEqual(new CheckoutSolution().checkout('AAABBA'), EXPECTED_TOTAL)
         })
     })
@@ -93,6 +93,13 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
 
             assert.strictEqual(new CheckoutSolution().checkout('AAAAA'), OFFER_PRICE_FOR_FIVE_A)
+        })
+
+         it('should return the correct offer price for eight A, selecting the right offers', () => {
+            OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
+            OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
+
+            assert.strictEqual(new CheckoutSolution().checkout('AAAAAAAA'), OFFER_PRICE_FOR_THREE_A + OFFER_PRICE_FOR_FIVE_A)
         })
     })
 })
