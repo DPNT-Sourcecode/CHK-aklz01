@@ -72,5 +72,14 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         it('should return the correct price for a single E', () => {
             assert.strictEqual(new CheckoutSolution().checkout('E'), PRICES['E'])
         })
+        
+        it('should return the correct price for two E items', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('EE'), PRICES['E'] * 2)
+        })
+
+        it('should return the correct price for two E and one B (B should be free)', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('EEB'), PRICES['E'] * 2)
+        })
+        
     })
 })
