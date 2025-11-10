@@ -5,8 +5,8 @@ var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
 
 describe('CHK Challenge: Checkout', function() {
-    it.skip('empty input returns zero', () => {
-        assert.strictEqual(true, true)
+    it('empty input returns zero', () => {
+        assert.strictEqual(new CheckoutSolution().checkout(''), 0)
     })
 
     it.skip('single A returns 50', () => {
