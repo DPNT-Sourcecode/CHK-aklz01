@@ -149,4 +149,52 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             });
         });
     });
+
+    describe('CHK_R4 - Broad range of products', function () {
+        const checkout = new CheckoutSolution();
+
+        describe('New Items F to Z - Table Test', function () {
+            const items = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+            items.forEach(sku => {
+                it(`should return correct price for single ${sku}`, function () {
+                    assert.strictEqual(checkout.checkout(sku), PRICES[sku]);
+                });
+            });
+        });
+
+        describe('Multi-buy Offers - Table Test', function () {
+            const offerTests = [
+                { skus: 'HHH', expected: 'H-3' },
+                { skus: 'HHHHH', expected: 'H-5' },
+                { skus: 'HHHHHHHHHH', expected: 'H-10' },
+                { skus: 'KK', expected: 'K-2' },
+                { skus: 'VV', expected: 'V-2' },
+                { skus: 'VVV', expected: 'V-3' },
+            ];
+
+            offerTests.forEach(test => {
+                it(`should return offer price for ${test.skus}`, function () {
+                    const [sku, qty] = test.expected.split('-');
+                    const offerPrice = MULTI_BUY_OFFERS[sku].find(o => o.quantity === parseInt(qty)).price;
+                    assert.strictEqual(checkout.checkout(test.skus), offerPrice);
+                });
+            });
+        });
+
+        describe('Get One Free Offers - Table Test', function () {
+            const getOneFreeTests = [
+                { skus: 'EEB', expected: PRICES['E'] * 2 },
+                { skus: 'EEBB', expected: (PRICES['E'] * 2) + PRICES['B'] },
+                { skus: 'FFF', expected: PRICES['F'] * 2 },
+                { skus: 'FFFFFF', expected: PRICES['F'] * 4 },
+            ];
+
+            getOneFreeTests.forEach(test => {
+                it(`should return discount for ${test.skus}`, function () {
+                    assert.strictEqual(checkout.checkout(test.skus), test.expected);
+                });
+            });
+        });
+    });
 })
