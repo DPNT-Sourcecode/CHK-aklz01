@@ -84,7 +84,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         })
 
         it('should return zero discount when free item not present', function () {
-            const engine = new OffersEngine([[makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES }]);
+            const engine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ E: 2 });
             // 2E qualifies for 1B free, but no B present
             assert.strictEqual(discount, 0);
@@ -92,7 +92,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         });
 
         it('should apply 2E get 1B free', function () {
-            const engine = new OffersEngine([[makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES }]);
+            const engine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ E: 2, B: 1 });
             // 2E qualifies for 1B free, 1B available, discount = 1 * 30 = 30
             assert.strictEqual(discount, 30);
@@ -100,7 +100,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         });
 
         it('should apply 2E get 1B free with multiple Bs', function () {
-            const engine = new OffersEngine([[makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES }]);
+            const engine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ E: 2, B: 3 });
             // 2E qualifies for 1B free, 3B available, only 1 free applied, discount = 30
             assert.strictEqual(discount, 30);
@@ -108,7 +108,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         });
 
         it('should apply 4E get 2B free', function () {
-            const engine = new OffersEngine([[makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES }]);
+            const engine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ E: 4, B: 3 });
             // 4E qualifies for 2B free, 3B available, 2 free applied, discount = 2 * 30 = 60
             assert.strictEqual(discount, 60);
