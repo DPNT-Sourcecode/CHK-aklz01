@@ -22,6 +22,7 @@ lerna-debug.log*
 # ~~~~~~~~~ Accelerate ~~~~~~~~~
 challenges/
 config/
+!solutions/CHK/config/
 coverage/
 coverage.tdl
 jre/
@@ -29,3 +30,4 @@ record/
 
 
 track/
+
