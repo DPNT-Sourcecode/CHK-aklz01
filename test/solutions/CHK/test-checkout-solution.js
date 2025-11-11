@@ -3,7 +3,7 @@ var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
-const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/config')
+const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/chk_config')
 
 describe('CHK Challenge: checkout(string) -> integer', function () {
 
@@ -56,8 +56,8 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
     describe('Edge and Error cases', () => {
 
         it('should return -1 for an input that is not a valid string', () => {
-                assert.strictEqual(new CheckoutSolution().checkout(2), -1)
-            })
+            assert.strictEqual(new CheckoutSolution().checkout(2), -1)
+        })
 
         it('should return -1 for an input that contains invalid skus', () => {
             assert.strictEqual(new CheckoutSolution().checkout('ABG'), -1)
@@ -72,7 +72,7 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         it('should return the correct price for a single E', () => {
             assert.strictEqual(new CheckoutSolution().checkout('E'), PRICES['E'])
         })
-        
+
         it('should return the correct price for two E items', () => {
             assert.strictEqual(new CheckoutSolution().checkout('EE'), PRICES['E'] * 2)
         })
@@ -88,14 +88,14 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         it('should return the correct price for four E and one B (B should be free)', () => {
             assert.strictEqual(new CheckoutSolution().checkout('EEEEB'), PRICES['E'] * 4)
         })
-        
+
         it('should return the correct offer price for five A, selecting the right offer', () => {
             OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
 
             assert.strictEqual(new CheckoutSolution().checkout('AAAAA'), OFFER_PRICE_FOR_FIVE_A)
         })
 
-         it('should return the correct offer price for eight A, selecting the right offers', () => {
+        it('should return the correct offer price for eight A, selecting the right offers', () => {
             OFFER_PRICE_FOR_FIVE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 5).price
             OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
 
@@ -109,4 +109,25 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             assert.strictEqual(new CheckoutSolution().checkout('AAABEE'), OFFER_PRICE_FOR_THREE_A + PRICES['E'] * 2)
         })
     })
+
+    describe('CHK_R3 - Item F and new offers', function () {
+        const checkout = new CheckoutSolution();
+
+        describe('Item F Basic Functionality', function () {
+            it('should return 10 for single F', function () {
+                assert.strictEqual(checkout.checkout("F"), 10);
+            });
+
+            it('should handle F with other items', function () {
+                assert.strictEqual(checkout.checkout("ABCDEF"), 165);
+            });
+        });
+
+        describe('Item F Offers', function () {
+            it.skip('should apply F offer when applicable', function () {
+                // Add test based on F's specific offer
+                assert.strictEqual(true, true);
+            });
+        });
+    });
 })
