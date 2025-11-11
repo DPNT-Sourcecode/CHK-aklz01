@@ -3,7 +3,7 @@ var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
-const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/inventory/prices')
+const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/config/prices')
 
 describe('CHK Challenge: checkout(string) -> integer', function () {
 
