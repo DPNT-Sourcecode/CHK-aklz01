@@ -128,25 +128,26 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 assert.strictEqual(checkout.checkout(""), 0);
             });
 
-            it('should return 10 for single F (no offer)', function () {
-                assert.strictEqual(checkout.checkout("F"), 10);
+            it('should return unit price for single F (no offer)', function () {
+                assert.strictEqual(checkout.checkout("F"), PRICES['F']);
             });
 
-            it('should return 10 for three Fs (buy 2 get 1 free)', function () {
-                assert.strictEqual(checkout.checkout("FFF"), 10);
+            it('should return price of two for three Fs (buy 2 get 1 free)', function () {
+                assert.strictEqual(checkout.checkout("FFF"), PRICES['F'] * 2);
             });
 
-            it('should return 20 for six Fs (buy 2 get 1 free, buy 2 get 1 free)', function () {
-                assert.strictEqual(checkout.checkout("FFFFFF"), 20);
+            it('should return price of 3 for six Fs (buy 2 get 1 free, buy 2 get 1 free)', function () {
+                assert.strictEqual(checkout.checkout("FFFFFF"), PRICES['F'] * 3);
             });
 
-            it.skip('should return 30 for five Fs (buy 2 get 1 free, buy 2 get 1 free, 1 at full price)', function () {
-                assert.strictEqual(checkout.checkout("FFFFF"), 30);
+            it.skip('should return price of 4 for five Fs (buy 2 get 1 free, 2 at full price)', function () {
+                assert.strictEqual(checkout.checkout("FFFFF"), PRICES['F'] * 4);
             });
 
             it.skip('should handle F offer with other items', function () {
-                assert.strictEqual(checkout.checkout("AAAFFFF"), 230);
+                assert.strictEqual(checkout.checkout("AAAFFFF"), 240);
             });
         });
     });
 })
+
