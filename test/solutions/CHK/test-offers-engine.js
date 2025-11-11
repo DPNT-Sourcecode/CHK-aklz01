@@ -25,7 +25,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { A: 0 });
         })
 
-        it('should apply 5A for 200 offer', function () {
+        it('should apply 5A for 200 offer', () => {
             const engine = new OffersEngine([makeMultiBuyHandler(MULTI_BUY_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ A: 5 });
             // Unit price: 5 * 50 = 250, offer price = 200, discount = 50
@@ -33,7 +33,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { A: 0 });
         });
 
-        it('should apply largest offer first (6A)', function () {
+        it('should apply largest offer first (6A)', () => {
             const engine = new OffersEngine([makeMultiBuyHandler(MULTI_BUY_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ A: 6 });
             // 5A for 200 (discount 50) + 1A at 50 (no discount) = total 50
@@ -41,7 +41,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { A: 1 });
         });
 
-        it('should apply 8A correctly (5A + 3A offers)', function () {
+        it('should apply 8A correctly (5A + 3A offers)', () => {
             const engine = new OffersEngine([makeMultiBuyHandler(MULTI_BUY_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ A: 8 });
             // 5A for 200 (discount 50) + 3A for 130 (discount 20) = total 70
@@ -49,7 +49,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { A: 0 });
         });
 
-        it('should apply 2B for 45 offer', function () {
+        it('should apply 2B for 45 offer', () => {
             const engine = new OffersEngine([makeMultiBuyHandler(MULTI_BUY_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ B: 2 });
             // Unit price: 2 * 30 = 60, offer price = 45, discount = 15
@@ -57,7 +57,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { B: 0 });
         });
 
-        it('should handle multiple SKUs with offers', function () {
+        it('should handle multiple SKUs with offers', () => {
             const engine = new OffersEngine([makeMultiBuyHandler(MULTI_BUY_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ A: 3, B: 2 });
             // 3A: discount 20, 2B: discount 15, total = 35
@@ -65,5 +65,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { A: 0, B: 0 });
         });
     })
+
+    describe('', () => {})
 })
 
