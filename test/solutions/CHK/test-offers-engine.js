@@ -2,7 +2,7 @@ var mocha = require('mocha')
 var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
-const { OffersEngine, makeMultiBuyHandler } = require('../../../lib/solutions/CHK/offers_engine');
+const { OffersEngine, makeMultiBuyHandler, makeGetOneFreeHandler } = require('../../../lib/solutions/CHK/offers_engine');
 const { GET_ONE_FREE_OFFERS, MULTI_BUY_OFFERS, PRICES } = require('../../../lib/solutions/CHK/config')
 
 describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, remaining: Object}', function () {
@@ -74,7 +74,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
     })
 
     describe('Get One Free Offers', () => {
-        it.skip('should return a zero discount if not items qualify', ()=> {
+        it('should return a zero discount if not items qualify', ()=> {
             const offersEngine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
             const basket = { B: 2};
             const { discount, remaining } = offersEngine.applyOffers(basket);
@@ -89,4 +89,3 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         it.skip('', ()=> {})
     })
 })
-
