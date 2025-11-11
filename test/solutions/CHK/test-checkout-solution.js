@@ -136,8 +136,8 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 assert.strictEqual(checkout.checkout("FFF"), PRICES['F'] * 2);
             });
 
-            it('should return price of 3 for six Fs (buy 2 get 1 free, buy 2 get 1 free)', function () {
-                assert.strictEqual(checkout.checkout("FFFFFF"), PRICES['F'] * 3);
+            it('should return price of 4 for six Fs (buy 2 get 1 free, buy 2 get 1 free)', function () {
+                assert.strictEqual(checkout.checkout("FFFFFF"), PRICES['F'] * 4);
             });
 
             it.skip('should return price of 4 for five Fs (buy 2 get 1 free, 2 at full price)', function () {
@@ -150,4 +150,5 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         });
     });
 })
+
 
