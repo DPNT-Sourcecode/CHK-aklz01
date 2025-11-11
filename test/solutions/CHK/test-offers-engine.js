@@ -115,4 +115,40 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { E: 4, B: 1 });
         });
     })
+
+    describe('Combined Offers (Sequential) (I asked Claude to add more tests)', function () {
+        it('should apply get one free first, then multi-buy', function () {
+            const handlers = [
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
+            ];
+            const engine = new OffersEngine(handlers);
+            const { discount, remaining } = engine.applyOffers({ E: 2, B: 2, A: 3 });
+            // First: 2E get 1B free -> discount 30, remaining { E: 2, B: 1, A: 3 }
+            // Then: 3A for 130 -> discount 20, remaining { E: 2, B: 1, A: 0 }
+            // Total discount: 50
+            assert.strictEqual(discount, 50);
+            assert.deepStrictEqual(remaining, { E: 2, B: 1, A: 0 });
+        });
+
+        it('should handle empty input', function () {
+            const engine = new OffersEngine([
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
+            ]);
+            const { discount, remaining } = engine.applyOffers({});
+            assert.strictEqual(discount, 0);
+            assert.deepStrictEqual(remaining, {});
+        });
+
+        it('should handle no applicable offers', function () {
+            const engine = new OffersEngine([
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
+            ]);
+            const { discount, remaining } = engine.applyOffers({ C: 1, D: 2 });
+            assert.strictEqual(discount, 0);
+            assert.deepStrictEqual(remaining, { C: 1, D: 2 });
+        });
+    });
 })
