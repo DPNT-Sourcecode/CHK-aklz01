@@ -123,10 +123,29 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             });
         });
 
-        describe('Item F Offers', function () {
-            it.skip('should apply F offer when applicable', function () {
-                // Add test based on F's specific offer
-                assert.strictEqual(true, true);
+        describe('Item F Buy One Get One Free Offer', function () {
+            it('should return 0 for empty F', function () {
+                assert.strictEqual(checkout.checkout(""), 0);
+            });
+
+            it('should return 10 for single F (no offer)', function () {
+                assert.strictEqual(checkout.checkout("F"), 10);
+            });
+
+            it('should return 10 for three Fs (buy 2 get 1 free)', function () {
+                assert.strictEqual(checkout.checkout("FFF"), 10);
+            });
+
+            it('should return 20 for six Fs (buy 2 get 1 free, buy 2 get 1 free)', function () {
+                assert.strictEqual(checkout.checkout("FFFFFF"), 20);
+            });
+
+            it.skip('should return 30 for five Fs (buy 2 get 1 free, buy 2 get 1 free, 1 at full price)', function () {
+                assert.strictEqual(checkout.checkout("FFFFF"), 30);
+            });
+
+            it.skip('should handle F offer with other items', function () {
+                assert.strictEqual(checkout.checkout("AAAFFFF"), 230);
             });
         });
     });
