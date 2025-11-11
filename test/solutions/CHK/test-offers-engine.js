@@ -15,5 +15,14 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.strictEqual(discount, 0);
             assert.deepStrictEqual(remaining, basket);
         })
+
+        it('should apply 3A for 130 offer', () => {
+            const offersEngine = new OffersEngine([], { PRICES });
+            const basket = { 'A': 3};
+            const { discount, remaining } = offersEngine.applyOffers(basket);
+            // Unit price: 3 * 50 = 150, offer price = 130, discount = 20
+            assert.strictEqual(discount, 20);
+            assert.deepStrictEqual(remaining, {A: 0});
+        })
     })
 })
