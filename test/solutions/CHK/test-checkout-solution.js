@@ -150,5 +150,3 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         });
     });
 })
-
-
