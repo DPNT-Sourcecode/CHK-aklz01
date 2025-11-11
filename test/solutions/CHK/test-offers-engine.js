@@ -2,7 +2,7 @@ var mocha = require('mocha')
 var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
-const OffersEngine = require('../../../lib/solutions/CHK/offers_engine');
+const { OffersEngine } = require('../../../lib/solutions/CHK/offers_engine');
 const { GET_ONE_FREE_OFFERS, MULTI_BUY_OFFERS, PRICES } = require('../../../lib/solutions/CHK/config')
 
 describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, remaining: Object}', function () {
@@ -18,11 +18,11 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
 
         it('should apply 3A for 130 offer', () => {
             const offersEngine = new OffersEngine([], { PRICES });
-            const basket = { 'A': 3};
+            const basket = { 'A': 3 };
             const { discount, remaining } = offersEngine.applyOffers(basket);
             // Unit price: 3 * 50 = 150, offer price = 130, discount = 20
             assert.strictEqual(discount, 20);
-            assert.deepStrictEqual(remaining, {A: 0});
+            assert.deepStrictEqual(remaining, { A: 0 });
         })
     })
 })
