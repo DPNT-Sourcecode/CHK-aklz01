@@ -152,4 +152,3 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
         });
     });
 })
-
