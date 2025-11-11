@@ -119,10 +119,10 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
     describe('Combined Offers (Sequential) (I asked Claude to add more tests)', function () {
         it('should apply get one free first, then multi-buy', function () {
             const handlers = [
-                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
-                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS)
             ];
-            const engine = new OffersEngine(handlers);
+            const engine = new OffersEngine(handlers, { PRICES });
             const { discount, remaining } = engine.applyOffers({ E: 2, B: 2, A: 3 });
             // First: 2E get 1B free -> discount 30, remaining { E: 2, B: 1, A: 3 }
             // Then: 3A for 130 -> discount 20, remaining { E: 2, B: 1, A: 0 }
@@ -133,9 +133,9 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
 
         it('should handle empty input', function () {
             const engine = new OffersEngine([
-                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
-                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
-            ]);
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS)
+            ], { PRICES });
             const { discount, remaining } = engine.applyOffers({});
             assert.strictEqual(discount, 0);
             assert.deepStrictEqual(remaining, {});
@@ -143,12 +143,13 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
 
         it('should handle no applicable offers', function () {
             const engine = new OffersEngine([
-                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS, PRICES),
-                makeMultiBuyHandler(MULTI_BUY_OFFERS, PRICES)
-            ]);
+                makeGetOneFreeHandler(GET_ONE_FREE_OFFERS),
+                makeMultiBuyHandler(MULTI_BUY_OFFERS)
+            ], { PRICES });
             const { discount, remaining } = engine.applyOffers({ C: 1, D: 2 });
             assert.strictEqual(discount, 0);
             assert.deepStrictEqual(remaining, { C: 1, D: 2 });
         });
     });
 })
+
