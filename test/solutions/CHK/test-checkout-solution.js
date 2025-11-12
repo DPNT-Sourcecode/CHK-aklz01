@@ -219,6 +219,13 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 // 3S = 45, 1S = 20, total = 65
                 assert.strictEqual(checkout.checkout('SSSS'), OFFER_PRICE_FOR_GROUP + PRICES['S']);
             });
+
+            it('should apply get-one-free, then multi-buy, then group offers', function () {
+                // E(40) * 2 + B(30) * 2 - 1B free = 110
+                // A(50) * 3 = 130 (offer)
+                // Total: 110 + 130 = 240
+                assert.strictEqual(checkout.checkout('EEBAAAB'), 240);
+            });
         });
     });
 })
