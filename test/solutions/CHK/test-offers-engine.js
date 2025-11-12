@@ -151,4 +151,10 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { C: 1, D: 2 });
         });
     });
+
+    describe('CHK_R5 -Group Offers', () => {
+        it.skip('should return zero discount when insufficient group items present', () => {
+            const engine = new OffersEngine([], { PRICES });
+        });
+    })
 })
