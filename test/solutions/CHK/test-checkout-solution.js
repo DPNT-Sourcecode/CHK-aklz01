@@ -200,9 +200,19 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         });
 
         describe('Group Offers - Buy any 3 of (S,T,X,Y,Z) for 45', function () {
+            OFFER_PRICE_FOR_GROUP = GROUP_OFFERS['S,T,X,Y,Z'].price
+
             it('should apply group offer for 3S', function () {
-                OFFER_PRICE_FOR_GROUP = GROUP_OFFERS['S,T,X,Y,Z'].price
                 assert.strictEqual(checkout.checkout('SSS'), OFFER_PRICE_FOR_GROUP);
+            });
+
+            it('should apply group offer for mixed S,T,X', function () {
+                assert.strictEqual(checkout.checkout('STX'), OFFER_PRICE_FOR_GROUP);
+            });
+
+            it('should apply group offer for mixed S,T,Y,Z', function () {
+                // S(20) + T(20) + Y(20) = 60, group offer = 45
+                assert.strictEqual(checkout.checkout('STY'), 45);
             });
         });
     });
