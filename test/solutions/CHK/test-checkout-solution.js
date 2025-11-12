@@ -3,7 +3,7 @@ var describe = mocha.describe
 var it = mocha.it
 var assert = require('assert');
 const CheckoutSolution = require('../../../lib/solutions/CHK/checkout_solution');
-const { PRICES, MULTI_BUY_OFFERS } = require('../../../lib/solutions/CHK/chk_config')
+const { PRICES, MULTI_BUY_OFFERS, GROUP_OFFERS } = require('../../../lib/solutions/CHK/chk_config')
 
 describe('CHK Challenge: checkout(string) -> integer', function () {
 
@@ -196,6 +196,13 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 it(`should return discount for ${test.skus}`, function () {
                     assert.strictEqual(checkout.checkout(test.skus), test.expected);
                 });
+            });
+        });
+
+        describe('Group Offers - Buy any 3 of (S,T,X,Y,Z) for 45', function () {
+            it('should apply group offer for 3S', function () {
+                OFFER_PRICE_FOR_GROUP = GROUP_OFFERS['S,T,X,Y,Z'].price
+                assert.strictEqual(checkout.checkout('SSS'), OFFER_PRICE_FOR_GROUP);
             });
         });
     });
