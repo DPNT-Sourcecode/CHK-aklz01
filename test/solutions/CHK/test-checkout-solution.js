@@ -16,6 +16,10 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             assert.strictEqual(new CheckoutSolution().checkout('A'), PRICES['A'])
         })
 
+         it('should return the correct price for a single K', () => {
+            assert.strictEqual(new CheckoutSolution().checkout('K'), 70)
+        })
+
         it('should return the correct price for a single B', () => {
             assert.strictEqual(new CheckoutSolution().checkout('B'), PRICES['B'])
         })
