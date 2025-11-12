@@ -215,7 +215,7 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 assert.strictEqual(checkout.checkout('STY'), OFFER_PRICE_FOR_GROUP);
             });
 
-            it.skip('should apply group offer for 3 items and charge remainder at unit price', function () {
+            it('should apply group offer for 3 items and charge remainder at unit price', function () {
                 // 3S = 45, 1S = 20, total = 65
                 assert.strictEqual(checkout.checkout('SSSS'), OFFER_PRICE_FOR_GROUP + PRICES['S']);
             });
@@ -225,6 +225,14 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
                 // A(50) * 3 = 130 (offer)
                 // Total: 110 + 130 = 240
                 assert.strictEqual(checkout.checkout('EEBAAAB'), 240);
+            });
+
+            it.skip('should apply multi-buy H then group offers on remainder', function () {
+                // H * 5 = 45 (multi-buy)
+                // H * 2 + S + T + X (not enough for group)
+                // H * 2 = 20, S + T + X = 45 (group)
+                // Total: 45 + 20 + 45 = 110
+                assert.strictEqual(checkout.checkout('HHHHHHHSTX'), 110);
             });
         });
     });
