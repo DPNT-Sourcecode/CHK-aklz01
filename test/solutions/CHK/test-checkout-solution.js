@@ -145,7 +145,9 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             });
 
             it('should handle F offer with other items', function () {
-                assert.strictEqual(checkout.checkout("AAAFFFF"), 240);
+                OFFER_PRICE_FOR_THREE_A = MULTI_BUY_OFFERS['A'].find(o => o.quantity === 3).price
+
+                assert.strictEqual(checkout.checkout("AAAFFFF"), OFFER_PRICE_FOR_THREE_A + PRICES['F'] * 3);
             });
         });
     });
@@ -163,24 +165,24 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
             });
         });
 
-        // describe('Multi-buy Offers - Table Test', function () {
-        //     const offerTests = [
-        //         { skus: 'HHH', expected: 'H-3' },
-        //         { skus: 'HHHHH', expected: 'H-5' },
-        //         { skus: 'HHHHHHHHHH', expected: 'H-10' },
-        //         { skus: 'KK', expected: 'K-2' },
-        //         { skus: 'VV', expected: 'V-2' },
-        //         { skus: 'VVV', expected: 'V-3' },
-        //     ];
+        describe('Multi-buy Offers - Table Test', function () {
+            const offerTests = [
+                { skus: 'HHH', expected: 'H-3' },
+                { skus: 'HHHHH', expected: 'H-5' },
+                { skus: 'HHHHHHHHHH', expected: 'H-10' },
+                { skus: 'KK', expected: 'K-2' },
+                { skus: 'VV', expected: 'V-2' },
+                { skus: 'VVV', expected: 'V-3' },
+            ];
 
-        //     offerTests.forEach(test => {
-        //         it(`should return offer price for ${test.skus}`, function () {
-        //             const [sku, qty] = test.expected.split('-');
-        //             const offerPrice = MULTI_BUY_OFFERS[sku].find(o => o.quantity === parseInt(qty)).price;
-        //             assert.strictEqual(checkout.checkout(test.skus), offerPrice);
-        //         });
-        //     });
-        // });
+            offerTests.forEach(test => {
+                it(`should return offer price for ${test.skus}`, function () {
+                    const [sku, qty] = test.expected.split('-');
+                    const offerPrice = MULTI_BUY_OFFERS[sku].find(o => o.quantity === parseInt(qty)).price;
+                    assert.strictEqual(checkout.checkout(test.skus), offerPrice);
+                });
+            });
+        });
 
         describe('Get One Free Offers - Table Test', function () {
             const getOneFreeTests = [
@@ -198,3 +200,4 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
         });
     });
 })
+
