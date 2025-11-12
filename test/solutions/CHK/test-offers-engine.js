@@ -171,7 +171,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { S: 0 });
         });
 
-        it.skip('should apply group offer to mixed items (S, T, X)', () => {
+        it('should apply group offer to mixed items (S, T, X)', () => {
             const engine = new OffersEngine([makeGroupOfferHandler(GROUP_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ S: 1, T: 1, X: 1 });
             // S(20) + T(20) + X(17) = 57, offer = 45, discount = 12
@@ -179,7 +179,7 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
             assert.deepStrictEqual(remaining, { S: 0, T: 0, X: 0 });
         });
 
-        it.skip('should apply group offer multiple times', () => {
+        it('should apply group offer multiple times', () => {
             const engine = new OffersEngine([makeGroupOfferHandler(GROUP_OFFERS)], { PRICES });
             const { discount, remaining } = engine.applyOffers({ S: 6 });
             // 6S = 2 groups of 3, each saves 15, total = 30
