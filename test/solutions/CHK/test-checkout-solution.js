@@ -212,7 +212,12 @@ describe('CHK Challenge: checkout(string) -> integer', function () {
 
             it('should apply group offer for mixed S,T,Y,Z', function () {
                 // S(20) + T(20) + Y(20) = 60, group offer = 45
-                assert.strictEqual(checkout.checkout('STY'), 45);
+                assert.strictEqual(checkout.checkout('STY'), OFFER_PRICE_FOR_GROUP);
+            });
+
+            it.skip('should apply group offer for 3 items and charge remainder at unit price', function () {
+                // 3S = 45, 1S = 20, total = 65
+                assert.strictEqual(checkout.checkout('SSSS'), OFFER_PRICE_FOR_GROUP + PRICES['S']);
             });
         });
     });
