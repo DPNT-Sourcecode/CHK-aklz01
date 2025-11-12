@@ -85,10 +85,11 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
 
         it('should return zero discount when free item not present', function () {
             const engine = new OffersEngine([makeGetOneFreeHandler(GET_ONE_FREE_OFFERS)], { PRICES });
-            const { discount, remaining } = engine.applyOffers({ E: 2 });
+            const basket = { E: 2 };
+            const { discount, remaining } = engine.applyOffers(basket);
             // 2E qualifies for 1B free, but no B present
             assert.strictEqual(discount, 0);
-            assert.deepStrictEqual(remaining, { E: 2 });
+            assert.deepStrictEqual(remaining, basket);
         });
 
         it('should apply 2E get 1B free', function () {
@@ -146,15 +147,20 @@ describe('CHK Challenge: OffersEngine.applyOffers(basket) -> {discount: number, 
                 makeGetOneFreeHandler(GET_ONE_FREE_OFFERS),
                 makeMultiBuyHandler(MULTI_BUY_OFFERS)
             ], { PRICES });
-            const { discount, remaining } = engine.applyOffers({ C: 1, D: 2 });
+            const basket = { C: 1, D: 2 }
+            const { discount, remaining } = engine.applyOffers(basket);
             assert.strictEqual(discount, 0);
-            assert.deepStrictEqual(remaining, { C: 1, D: 2 });
+            assert.deepStrictEqual(remaining, basket);
         });
     });
 
     describe('CHK_R5 -Group Offers', () => {
-        it.skip('should return zero discount when insufficient group items present', () => {
+        it('should return zero discount when insufficient group items present', () => {
             const engine = new OffersEngine([makeGetOneFreeHandler(GROUP_OFFERS)], { PRICES });
+            const basket = { C: 1, D: 2 }
+            const { discount, remaining } = engine.applyOffers(basket);
+            assert.strictEqual(discount, 0);
+            assert.deepStrictEqual(remaining, basket);
         });
     })
 })
